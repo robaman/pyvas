@@ -207,7 +207,8 @@ class Client(object):
         return self._create(request)
 
     def create_task(self, name, config_uuid, target_uuid,
-                    scanner_uuid=None, comment=None, schedule_uuid=None):
+                    scanner_uuid=None, comment=None, schedule_uuid=None,
+                    preferences=None):
         """Create a task."""
 
         if scanner_uuid is None:
@@ -231,6 +232,9 @@ class Client(object):
 
         if comment is not None:
             data.update({"comment": comment})
+
+        if preferences is not None:
+            data.update({"preferences": preferences})
 
         request = dict_to_lxml("create_task", data)
 

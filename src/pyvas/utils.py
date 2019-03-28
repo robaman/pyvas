@@ -29,7 +29,11 @@ def dict_to_lxml(root, dct):
                 else:
                     elem = etree.Element(tag)
                     parent.append(elem)
-                    inner_dict_to_xml(elem, child)
+                    if type(child) is list:
+                        for subchild in child:
+                            inner_dict_to_xml(elem, subchild)
+                    else:
+                        inner_dict_to_xml(elem, child)
 
         elif dict_item is not None:
             parent.text = six.text_type(dict_item)
